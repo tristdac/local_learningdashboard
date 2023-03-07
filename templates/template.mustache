@@ -1,0 +1,74 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_news_slider_plus/slider
+
+    Display News Slider Plus
+
+    News content json template
+
+    {
+    "itrent": [
+        {"course":"JavaScript Fundamentals", "date_completed":"2022-01-01","expiration_date":"2024-01-01","grade":"85"},
+        {"course":"PHP Fundamentals", "date_completed":"2023-01-01","expiration_date":"2024-01-01","grade":"93"},
+        {"course":"MySQL Fundamentals", "date_completed":"2022-07-20","expiration_date":"2024-07-20","grade":"95"}
+    ]
+}
+}}
+
+{{^user}}
+Not signed in
+{{/user}}
+
+{{#user}}
+    <div class="container row userwelcome">
+        <div class="welcometxt col-sm-12 col-md-8">
+            <p><strong>Welcome {{{firstname}}}</strong></p>
+            <p>{{#str}} welcome, local_learningdashboard{{/str}}</p>
+            {{#idnumber}}
+                <div class="alert alert-secondary">Employee ID#: {{{idnumber}}}</div>
+            {{/idnumber}}
+        </div>
+
+        <div class="welcomeimg col-sm-12 col-md-4">
+            <img src="{{{wwwroot}}}/local/learningdashboard/pix/image.png">
+        </div>
+    </div>
+
+    
+
+    <h2>{{#str}} mandtitle, local_learningdashboard{{/str}}</h2>
+    <p>{{#str}} manddesc, local_learningdashboard{{/str}}</p>
+
+    {{> local_learningdashboard/mandatory }}
+
+    <div class="container">
+        <div class="row">
+            <div class="meta col-md-6 col-sm-12">
+                <h2>{{#str}} metatitle, local_learningdashboard{{/str}}</h2>
+                <p>{{#str}} metadesc, local_learningdashboard{{/str}}</p>
+                {{> local_learningdashboard/meta }}
+            </div>
+
+            <div class="other col-md-6 col-sm-12">
+                <h2>{{#str}} othertitle, local_learningdashboard{{/str}}</h2>
+                <p>{{#str}} otherdesc, local_learningdashboard{{/str}}</p>
+                {{> local_learningdashboard/other }}
+            </div>
+        </div>
+    </div>
+{{/user}}

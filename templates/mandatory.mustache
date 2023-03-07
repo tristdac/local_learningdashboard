@@ -1,0 +1,149 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_news_slider_plus/slider
+
+    Display News Slider Plus
+
+    News content json template
+
+    {
+    "itrent": [
+        {"course":"JavaScript Fundamentals", "date_completed":"2022-01-01","expiration_date":"2024-01-01","grade":"85"},
+        {"course":"PHP Fundamentals", "date_completed":"2023-01-01","expiration_date":"2024-01-01","grade":"93"},
+        {"course":"MySQL Fundamentals", "date_completed":"2022-07-20","expiration_date":"2024-07-20","grade":"95"}
+    ]
+}
+}}
+
+<div class="itrent d-inline-flex p-2">
+    {{#mandatory}}
+        <div class="mand_train flex-wrap flex-fill align-items-stretch">
+            <div class="status">
+                {{#completed}}
+                    {{^expired}}
+                            <i class="fa fa-check-circle fa-2x" data-toggle="tooltip" data-placement="top" {{^expiringsoon}}title="Well done... you're all up to date here"{{/expiringsoon}}{{#expiringsoon}}title="Expiring soon... renew as soon as possible"{{/expiringsoon}}></i>
+                    {{/expired}}
+                    {{#expired}}
+                        <i class="fa fa-exclamation-triangle fa-2x" data-toggle="tooltip" data-placement="top" title="Oops... this one has expired"></i>
+                    {{/expired}}
+                {{/completed}}
+                {{^completed}}
+                    <i class="fa fa-exclamation-triangle fa-2x" data-toggle="tooltip" data-placement="top" title="It looks like you've not yet started or passed this one"></i>
+                {{/completed}}
+            </div>
+            <div class="title">
+                <h4>{{{course}}}</h4>
+            </div>
+            <div class="courselink">
+                <a href="/course/view.php?id={{{courseid}}}" class="btn btn-secondary btn-lg" target="_blank" style="">
+                    {{#completed}}{{^expired}}{{^expiringsoon}}Review{{/expiringsoon}}{{#expiringsoon}}Renew{{/expiringsoon}}{{/expired}}{{/completed}}
+                    {{#expired}}Renew{{/expired}}
+                    {{^completed}}Start{{/completed}}
+                </a>
+            </div>
+            <div class="compdate">
+            <span class="small exp_date">
+                {{#completed}}
+                    <span class="alert">
+                        {{#expired}}
+                            <strong>EXPIRED</strong>
+                        {{/expired}}
+                        {{#expiringsoon}}
+                            <strong>EXPIRING SOON</strong> 
+                        {{/expiringsoon}}
+                        Expiration Date: {{{expiration_date}}}
+                    </span>
+                {{/completed}}
+            </span>
+            <p>
+                <span class="small">{{#completed}}Last Completed: {{{date_completed}}}{{/completed}}{{^completed}}<span class="alert">Not yet completed</span>{{/completed}}</span>
+            </p>
+            </div>
+            <div class="time">
+                <p>
+                    <span class="timeleft small" value="">{{#completed}}{{^expired}}<span style="font-size:20px;">{{{days_left}}}</span> days remaining until expiry{{/expired}}{{/completed}}</span>
+                </p>
+            </div>
+            
+            <div class="progress progress-bar-striped">
+                <div class="progress-bar" role="progressbar" style="width:100%" aria-valuenow="{{{percentage}}}" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+    {{/mandatory}}
+</div>
+
+{{#js}}
+    $(document).ready(function() {
+      // Select all progress bars on the page
+      var progressBars = $('.progress-bar');
+
+      // Update the value and color of a progress bar
+      function updateProgressBar(progressBar, value) {
+        progressBar.css('width', value + '%');
+
+        if (value < 10) {
+          progressBar.removeClass().addClass('progress-bar bg-danger');
+        } else if (value < 25) {
+          progressBar.removeClass().addClass('progress-bar bg-warning');
+        } else if (value <= 100) {
+          progressBar.removeClass().addClass('progress-bar bg-success');
+        }
+        
+        if (value < 1) {
+            progressBar.css('transition', 'none');
+            progressBar.css('width', '100%');
+            progressBar.removeClass().addClass('progress-bar bg-danger');
+        }
+      }
+
+      // Update the value and color of all progress bars on the page
+
+        progressBars.each(function() {
+          var progressBar = $(this);
+          var value = progressBar.attr('aria-valuenow');
+          updateProgressBar(progressBar, value);
+        });
+
+    var modules = $('.mand_train');        
+    modules.each(function() {
+      var card = $(this);
+      
+      if ( card.find('.progress-bar').hasClass( "bg-danger" ) ) {
+        card.find('.status i.fa').css('color', '#dc3545');
+        card.find('.compdate span.alert').addClass('alert-danger');
+      }
+      if ( card.find('.progress-bar').hasClass( "bg-warning" ) ) {
+        card.find('.status i.fa').css('color', '#ffc107');
+        card.find('.compdate span.alert').addClass('alert-warning');
+      }
+      if ( card.find('.progress-bar').hasClass( "bg-info" ) ) {
+        card.find('.status i.fa').css('color', '#17a2b8');
+        card.find('.compdate span.alert').addClass('alert-info');
+      }
+      if ( card.find('.progress-bar').hasClass( "bg-success" ) ) {
+        card.find('.status i.fa').css('color', '#28a745');
+        card.find('.compdate span.alert').addClass('alert-success');
+      }
+
+      
+      
+    });
+
+
+    });
+{{/js}}

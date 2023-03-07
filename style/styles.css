@@ -1,0 +1,33 @@
+.progress {
+  height: 5px;
+  border-radius: 0px;
+  width: 100%;
+  border-radius: 0px 0px 9px 9px;
+}
+
+.timeleft {
+  margin-left: 15px;
+}
+
+.compdate {
+  margin-left: 15px;
+  margin-top: -20px;
+}
+
+.mand_train .title {
+  padding: 15px;
+  display: inline-block;
+}
+
+.mand_train .status {
+  display: inline-block;
+}
+
+.mand_train {
+  border: 1px solid #d4d4d4;
+  margin:20px;
+}
+
+.mand_train .status .fa-check-circle {
+  color: green;
+}

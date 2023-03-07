@@ -1,0 +1,92 @@
+.mand_train .progress {
+  height: 5px;
+  border-radius: 0px;
+  width: 100%;
+  border-radius: 0 0 5px 5px!important;
+  bottom: 0px;
+  position: absolute;
+}
+
+.mand_train .progress-bar {
+  transition: width 2s;
+  transition-timing-function: ease-in-out;
+  transition-delay: 1s;
+  min-width: 1%;
+}
+
+.mand_train .timeleft {
+  margin-left: 15px;
+}
+
+.mand_train .compdate {
+  margin-left: 15px;
+/*  margin-top: -20px;*/
+}
+
+.mand_train .title {
+  padding: 15px;
+  display: inline-block;
+  margin-bottom: -20px;
+}
+
+.mand_train span.small.exp_date span {
+    margin-left: -5px;
+    display: inline-block;
+    padding: 10px;
+}
+
+.mand_train span.completed {
+    display: block;
+    margin-top: 20px;
+}
+
+.mand_train .status {
+  display: inline-block;
+  float: left;
+  margin: 10px;
+}
+
+.mand_train {
+  border: 1px solid #d4d4d4;
+  margin:20px;
+  display: block;
+  min-width:400px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.mand_train .status .fa-check-circle {
+  color: green;
+}
+
+.mand_train .status .fa-exclamation-triangle {
+  color: red;
+}
+
+.mand_train .courselink {
+  float: right;
+}
+
+.mand_train .courselink a.btn {
+    border-radius: 0px 5px 0 5px;
+}
+
+.mand_train i.fa.fa-hourglass-half {
+    position: absolute;
+    right: 5px;
+    bottom: 1px;
+}
+
+.itrent { 
+  flex-flow: row wrap;
+  margin-bottom: 100px;
+}
+
+.userwelcome {
+  border-radius: 10px;
+  border: 1px solid lightgrey;
+  padding: 20px;
+  background: azure;
+  margin-bottom: 50px;
+}
+}
